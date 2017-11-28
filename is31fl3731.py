@@ -153,6 +153,14 @@ class Matrix:
             for col in range(18):
                 self._register(frame, _BLINK_OFFSET + col, data)
 
+    def write_frame(self, data, frame=None):
+        if len(data) > 144:
+            raise ValueError("Bytearray too large for frame")
+        if frame is None:
+            frame = self._frame
+        self._bank(frame)
+        self.i2c.writeto_mem(self.address, _COLOR_OFFSET, data)
+
     def _pixel_addr(self, x, y):
         return x + y * 16
 

@@ -63,6 +63,15 @@ Matrices
 
         Fill the display with specified color and/or blink.
 
+    .. method:: write_frame(self, data, frame=None)
+
+        Write the bytearray of brightness ("color") ``data`` to a frame. If
+        ``frame`` is not specified, affects the currently active frame.
+        Validates that the supplied bytearray won't overflow the frame's
+        region, but allows for shorter lengths. Doesn't do coordinate math
+        (e.g for 15x7 CharlieWing devices); that's left up to the caller to
+        know.
+
     .. method:: pixel(self, x, y, color=None, blink=None, frame=None)
 
         Read or write the specified pixel.
